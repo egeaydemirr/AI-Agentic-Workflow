@@ -1,36 +1,217 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Koç Mobil - React Native Architecture
 
-# Getting Started
+A React Native project following Koç Mobil architecture standards with Redux Toolkit, React Navigation, and React Native Paper.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+✨ **Modular Architecture**: Feature-based folder structure  
+🎨 **Theming**: React Native Paper with centralized colors and typography  
+🔄 **State Management**: Redux Toolkit with RTK Query  
+🧭 **Navigation**: React Navigation with TypeScript support  
+📦 **Ready to Use**: Pre-configured with best practices
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Quick Start
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Prerequisites
 
-```sh
-# Using npm
-npm start
+- Node.js >= 22.11.0
+- Yarn package manager
+- iOS: Xcode and CocoaPods (macOS only)
+- Android: Android Studio and JDK
 
-# OR using Yarn
-yarn start
+### Installation
+
+Run the setup script to install all dependencies:
+
+```bash
+chmod +x setup.sh
+./setup.sh
 ```
 
-## Step 2: Build and run your app
+Or manually:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+```bash
+# Install JavaScript dependencies
+yarn install
 
-### Android
+# Install iOS dependencies (macOS only)
+cd ios && pod install && cd ..
 
-```sh
-# Using npm
-npm run android
+# Copy environment file
+cp .env.example .env
+```
 
-# OR using Yarn
+### Running the App
+
+```bash
+# Start Metro bundler
+yarn start
+
+# Run on iOS (macOS only)
+yarn ios
+
+# Run on Android
 yarn android
 ```
+
+## Project Structure
+
+```
+src/
+├── features/          # Business features (isolated modules)
+│   └── home/
+│       ├── screens/   # Screen components
+│       ├── components/# Feature-specific components
+│       ├── hooks/     # Custom hooks
+│       ├── services/  # API endpoints (RTK Query)
+│       └── types.ts   # TypeScript types
+├── shared/            # Reusable cross-feature code
+│   ├── ui/            # UI components (Button, Input, Card, etc.)
+│   ├── hooks/         # Shared hooks
+│   ├── utils/         # Utility functions
+│   ├── validation/    # Validation schemas
+│   ├── security/      # Security utilities
+│   └── platform/      # Platform-specific helpers
+├── navigation/        # React Navigation setup
+├── services/          # API configuration
+│   └── api/           # RTK Query base API
+├── store/             # Redux store configuration
+├── theme/             # Theme configuration
+│   ├── colors.ts      # Color palette
+│   ├── typography.ts  # Font styles
+│   └── shadows.ts     # Shadow tokens
+├── config/            # App configuration
+├── i18n/              # Internationalization
+├── @types/            # Global TypeScript types
+└── assets/            # Static assets
+```
+
+## Technology Stack
+
+- **React Native** 0.84.0
+- **React Navigation** - Navigation library
+- **Redux Toolkit** - State management
+- **RTK Query** - Data fetching and caching
+- **Redux Persist** - State persistence
+- **React Native Paper** - UI component library
+- **TypeScript** - Type safety
+- **Yarn** - Package manager
+
+## Architecture Guidelines
+
+### Creating a New Feature
+
+1. Create feature folder: `src/features/<feature-name>/`
+2. Add required subfolders: `screens/`, `components/`, `hooks/`, `services/`
+3. Define types in `types.ts`
+4. Export public API in `index.ts`
+5. Add navigation routes in `src/navigation/types.ts`
+
+### Code Rules
+
+- ✅ Use Redux Toolkit for state management
+- ✅ Use RTK Query for API calls (no direct fetch/axios)
+- ✅ Use typed navigation hooks
+- ✅ Use theme colors (never hardcode)
+- ✅ Keep features isolated
+- ❌ Don't import between features
+- ❌ Don't hardcode colors or fonts
+- ❌ Don't put business logic in UI components
+
+### Adding a New Screen
+
+1. Create screen component in `src/features/<feature>/screens/`
+2. Add route type to `src/navigation/types.ts`
+3. Register screen in `src/navigation/RootNavigator.tsx`
+4. Navigate using typed hook: `useNavigation()`
+
+### Making API Calls
+
+Use RTK Query by injecting endpoints into the base API:
+
+```typescript
+// src/features/myfeature/services/myApi.ts
+import { baseApi } from '../../../services/api/baseApi';
+
+export const myApi = baseApi.injectEndpoints({
+  endpoints: builder => ({
+    getData: builder.query<DataType, void>({
+      query: () => '/endpoint',
+    }),
+  }),
+});
+
+export const { useGetDataQuery } = myApi;
+```
+
+## Environment Configuration
+
+Create a `.env` file in the root directory:
+
+```bash
+API_BASE_URL=https://api.example.com
+ENABLE_LOGS=true
+```
+
+## Documentation
+
+- [Project Structure](./docs/PROJECT_STRUCTURE.md) - Detailed architecture documentation and visual overview
+- [Architecture Guidelines](./.github/instructions/architecture.md) - Architecture standards
+- [Setup Instructions](./docs/SETUP_INSTRUCTIONS.md) - Detailed setup guide
+- [GitHub Skills](./docs/github-skills.md) - GitHub Skills kullanım rehberi
+- [GitHub Custom Agents](./docs/github-custom-agents.md) - Custom agent oluşturma ve kullanım kılavuzu
+- [AI Workflow Progress](./docs/AI_WORKFLOW_PROGRESS.md) - AI workflow geliştirme günlüğü
+
+## Scripts
+
+```bash
+yarn start          # Start Metro bundler
+yarn ios            # Run iOS app
+yarn android        # Run Android app
+yarn lint           # Run ESLint
+yarn test           # Run tests
+```
+
+## Troubleshooting
+
+### TypeScript Errors
+
+If you see JSX or import errors:
+
+1. Check `tsconfig.json` has correct settings
+2. Run `yarn install` again
+3. Restart TypeScript server in your IDE
+
+### iOS Build Issues
+
+```bash
+cd ios
+pod deintegrate
+pod install
+cd ..
+```
+
+### Android Build Issues
+
+```bash
+cd android
+./gradlew clean
+cd ..
+```
+
+## License
+
+Private - Koç Mobil
+
+---
+
+Made with ❤️ following Koç Mobil architecture standards
+
+# OR using Yarn
+
+yarn android
+
+````
 
 ### iOS
 
@@ -40,7 +221,7 @@ The first time you create a new project, run the Ruby bundler to install CocoaPo
 
 ```sh
 bundle install
-```
+````
 
 Then, and every time you update your native dependencies, run:
 
