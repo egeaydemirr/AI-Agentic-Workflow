@@ -37,7 +37,6 @@ src/
 
 ## Technology Stack
 
-- **React Native**: 0.84.0
 - **React Navigation**: For navigation
 - **Redux Toolkit**: State management
 - **RTK Query**: API calls and caching
