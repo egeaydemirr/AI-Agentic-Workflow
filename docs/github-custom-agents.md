@@ -11,7 +11,9 @@ Custom Agent, VS Code ve GitHub Copilot içinde çalışan, belirli bir role ve 
 ### 1. Agent Yaratma Süreci
 
 #### Adım 1: Keşif (Discovery)
+
 Foundry agent'ına aşağıdaki bilgileri verirsin:
+
 - **Role/Persona**: Agent hangi rolü üstlenecek? (örn: security reviewer, planner, architect, test writer)
 - **Primary Tasks**: Hangi spesifik görevleri yapacak?
 - **Tool Requirements**: Hangi araçlara ihtiyacı var? (sadece okuma mı, düzenleme mi?)
@@ -20,16 +22,20 @@ Foundry agent'ına aşağıdaki bilgileri verirsin:
 - **Target Users**: Kim kullanacak? (karmaşıklık seviyesini etkiler)
 
 #### Adım 2: Tasarım (Design)
+
 Foundry şunları önerir:
+
 - Agent adı ve açıklaması
 - Tool seçimi ve gerekçesi
 - Ana talimatlar/kılavuzlar
 - İsteğe bağlı handoff'lar (workflow entegrasyonu)
 
 #### Adım 3: Oluşturma (Draft)
+
 Foundry, `.agent.md` dosyasını tam yapısıyla oluşturur.
 
 #### Adım 4: İnceleme ve İyileştirme
+
 Tasarım kararlarını açıklar ve geri bildirimlere göre iterasyon yapar.
 
 ### 2. Agent Dosya Yapısı
@@ -39,9 +45,9 @@ Tasarım kararlarını açıklar ve geri bildirimlere göre iterasyon yapar.
 description: Kısa, net açıklama (chat input'ta gösterilir) - ZORUNLU
 name: Agent'ın görünen adı - Opsiyonel (dosya adı kullanılır)
 argument-hint: Kullanıcılar için rehber metin - Opsiyonel
-tools: ['tool1', 'tool2', 'toolset/*']  # Kullanılabilir araçlar
-model: Claude Sonnet 4.5  # Opsiyonel: belirli model seçimi
-handoffs:  # Opsiyonel: workflow geçişleri
+tools: ['tool1', 'tool2', 'toolset/*'] # Kullanılabilir araçlar
+model: Claude Sonnet 4.5 # Opsiyonel: belirli model seçimi
+handoffs: # Opsiyonel: workflow geçişleri
   - label: Sonraki Adım
     agent: hedef-agent-adı
     prompt: Önceden doldurulmuş prompt metni
@@ -51,50 +57,86 @@ handoffs:  # Opsiyonel: workflow geçişleri
 # Agent Başlığı
 
 ## Kimlik & Amaç
+
 Agent'ın rolü ve misyonu
 
 ## Ana Sorumluluklar
+
 - Birincil görevlerin listesi
 
 ## Çalışma Yönergeleri
+
 Nasıl çalışacağı, kalite standartları
 
 ## Kısıtlamalar & Sınırlar
+
 NE YAPMAMALI, güvenlik limitleri
 
 ## Çıktı Spesifikasyonları
+
 Beklenen format, yapı, detay seviyesi
 
 ## Örnekler
+
 Örnek etkileşimler veya çıktılar (gerekiyorsa)
 
 ## Tool Kullanım Kalıpları
+
 Belirli araçları ne zaman ve nasıl kullanacağı
 ```
 
 ### 3. Tool Seçim Stratejisi
 
 **Read-only Agents** (planlama, araştırma, inceleme):
+
 ```yaml
-tools: ['search', 'web/fetch', 'githubRepo', 'usages', 'grep_search', 'read_file', 'semantic_search']
+tools:
+  [
+    'search',
+    'web/fetch',
+    'githubRepo',
+    'usages',
+    'grep_search',
+    'read_file',
+    'semantic_search',
+  ]
 ```
 
 **Implementation Agents** (kodlama, refactoring):
+
 ```yaml
-tools: ['search', 'read_file', 'replace_string_in_file', 'multi_replace_string_in_file', 'create_file', 'run_in_terminal']
+tools:
+  [
+    'search',
+    'read_file',
+    'replace_string_in_file',
+    'multi_replace_string_in_file',
+    'create_file',
+    'run_in_terminal',
+  ]
 ```
 
 **Testing Agents**:
+
 ```yaml
-tools: ['read_file', 'run_notebook_cell', 'test_failure', 'run_in_terminal', 'get_errors']
+tools:
+  [
+    'read_file',
+    'run_notebook_cell',
+    'test_failure',
+    'run_in_terminal',
+    'get_errors',
+  ]
 ```
 
 **Deployment Agents**:
+
 ```yaml
 tools: ['run_in_terminal', 'create_and_run_task', 'get_errors']
 ```
 
 **MCP Integration** (tüm MCP server araçları):
+
 ```yaml
 tools: ['mcp_server_name/*']
 ```
@@ -102,28 +144,33 @@ tools: ['mcp_server_name/*']
 ### 4. Yaygın Agent Arketipleri
 
 #### Planner Agent
+
 - **Tools**: Sadece okuma
 - **Odak**: Araştırma, analiz, gereksinimleri parçalama
 - **Çıktı**: Yapılandırılmış implementasyon planları
 - **Handoff**: → Implementation Agent
 
 #### Implementation Agent
+
 - **Tools**: Tam düzenleme yetenekleri
 - **Odak**: Kod yazma, refactoring, değişiklikleri uygulama
 - **Kısıtlamalar**: Mevcut kalıpları takip et, kaliteyi koru
 - **Handoff**: → Review Agent veya Testing Agent
 
 #### Security Reviewer Agent
+
 - **Tools**: Sadece okuma + güvenlik analizi
 - **Odak**: Güvenlik açıklarını tespit et, iyileştirmeler öner
 - **Çıktı**: Güvenlik değerlendirme raporları
 
 #### Test Writer Agent
+
 - **Tools**: Okuma + yazma + test çalıştırma
 - **Odak**: Kapsamlı testler oluştur
 - **Pattern**: Önce başarısız testler yaz, sonra implement et
 
 #### Documentation Agent
+
 - **Tools**: Sadece okuma + dosya oluşturma
 - **Odak**: Net, kapsamlı dokümantasyon
 - **Çıktı**: Markdown dökümanlar, inline yorumlar, API dökümantasyonu
@@ -131,21 +178,25 @@ tools: ['mcp_server_name/*']
 ### 5. Workflow Entegrasyon Kalıpları
 
 **Sequential Handoff Chain:**
+
 ```
 Plan → Implement → Review → Deploy
 ```
 
 **Iterative Refinement:**
+
 ```
 Draft → Review → Revise → Finalize
 ```
 
 **Test-Driven Development:**
+
 ```
 Write Failing Tests → Implement → Verify Tests Pass
 ```
 
 **Research-to-Action:**
+
 ```
 Research → Recommend → Implement
 ```
@@ -153,12 +204,15 @@ Research → Recommend → Implement
 ### 6. Nasıl Kullanılır?
 
 #### 1. Custom Agent Foundry'yi Çağır
+
 VS Code'da GitHub Copilot Chat'te:
+
 ```
 @custom-agent-foundry Koç Healthcare için bir mobile architecture reviewer agent yaratmak istiyorum
 ```
 
 #### 2. Gereksinimlerini Belirt
+
 ```
 Bu agent:
 - React Native kod incelemesi yapacak
@@ -168,9 +222,11 @@ Bu agent:
 ```
 
 #### 3. Foundry Agent'ı Oluşturur
+
 `.github/agents/` klasörü altında yeni `.agent.md` dosyası oluşturulur.
 
 #### 4. Agent'ı Kullan
+
 ```
 @koc-architecture-reviewer Bu PR'daki değişiklikleri incele ve architecture.md'ye uygunluğunu kontrol et
 ```
@@ -178,6 +234,7 @@ Bu agent:
 ### 7. Kalite Kontrol Listesi
 
 Agent oluşturmadan önce:
+
 - ✅ Net, spesifik açıklama
 - ✅ Uygun tool seçimi (gereksiz tool yok)
 - ✅ İyi tanımlanmış rol ve sınırlar
@@ -190,21 +247,25 @@ Agent oluşturmadan önce:
 ### 8. Projeye Entegrasyon
 
 **Dosya Konumu:**
+
 ```
 .github/agents/your-agent-name.agent.md
 ```
 
 **Dosya Adlandırma:**
+
 - kebab-case kullan
 - Açıklayıcı isim ver
 - Örnek: `koc-architecture-reviewer.agent.md`
 
 **Instructions Dosyalarına Referans:**
+
 ```markdown
 Bu agent, [architecture.md](.github/instructions/architecture.md) kurallarını takip eder.
 ```
 
 **Tool Referansı:**
+
 ```markdown
 #tool:grep_search kullanarak kod içinde pattern arar.
 ```
@@ -212,8 +273,9 @@ Bu agent, [architecture.md](.github/instructions/architecture.md) kurallarını 
 ### 9. Örnek Agent Senaryoları (Koç Healthcare)
 
 #### Senaryo 1: Architecture Compliance Reviewer
+
 ```
-@custom-agent-foundry 
+@custom-agent-foundry
 Koç Mobile için architecture compliance checker agent yarat.
 - architecture.md kurallarına uygunluk kontrol etsin
 - PR'larda otomatik inceleme yapsın
@@ -222,6 +284,7 @@ Koç Mobile için architecture compliance checker agent yarat.
 ```
 
 #### Senaryo 2: Feature Scaffolder
+
 ```
 @custom-agent-foundry
 Yeni feature oluşturmak için scaffolder agent yarat.
@@ -232,6 +295,7 @@ Yeni feature oluşturmak için scaffolder agent yarat.
 ```
 
 #### Senaryo 3: Security Auditor
+
 ```
 @custom-agent-foundry
 Mobile güvenlik audit agent yarat.
@@ -264,6 +328,7 @@ Her agent, bir sonrakine handoff yapar ve context'i taşır.
 ## Sonuç
 
 Custom Agent Foundry kullanarak:
+
 1. İhtiyacına özel agentlar yaratabilirsin
 2. Workflow'ları otomatikleştirebilirsin
 3. Koç Healthcare standartlarını enforce edebilirsin

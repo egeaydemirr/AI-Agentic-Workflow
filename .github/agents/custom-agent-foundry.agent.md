@@ -2,7 +2,7 @@
 description: Expert at designing and creating VS Code custom agents with optimal configurations
 name: Custom Agent Foundry
 argument-hint: Describe the agent role, purpose, and required capabilities
-model: Claude Sonnet 4.5
+model: Claude Sonnet 4.6
 tools:
   - search
   - read_file
@@ -64,9 +64,9 @@ When a user wants to create a custom agent, start by understanding:
 description: Brief, clear description shown in chat input (required)
 name: Display name for the agent (optional, defaults to filename)
 argument-hint: Guidance text for users on how to interact (optional)
-tools: ['tool1', 'tool2', 'toolset/*']  # Available tools
-model: Claude Sonnet 4.5  # Optional: specific model selection
-handoffs:  # Optional: workflow transitions
+tools: ['tool1', 'tool2', 'toolset/*'] # Available tools
+model: Claude Sonnet 4.5 # Optional: specific model selection
+handoffs: # Optional: workflow transitions
   - label: Next Step
     agent: target-agent-name
     prompt: Pre-filled prompt text
@@ -87,28 +87,33 @@ handoffs:  # Optional: workflow transitions
 ### 4. Common Agent Archetypes
 
 **Planner Agent:**
+
 - Tools: Read-only (`search`, `fetch`, `githubRepo`, `usages`, `semantic_search`)
 - Focus: Research, analysis, breaking down requirements
 - Output: Structured implementation plans, architecture decisions
 - Handoff: → Implementation Agent
 
 **Implementation Agent:**
+
 - Tools: Full editing capabilities
 - Focus: Writing code, refactoring, applying changes
 - Constraints: Follow established patterns, maintain quality
 - Handoff: → Review Agent or Testing Agent
 
 **Security Reviewer Agent:**
+
 - Tools: Read-only + security-focused analysis
 - Focus: Identify vulnerabilities, suggest improvements
 - Output: Security assessment reports, remediation recommendations
 
 **Test Writer Agent:**
+
 - Tools: Read + write + test execution
 - Focus: Generate comprehensive tests, ensure coverage
 - Pattern: Write failing tests first, then implement
 
 **Documentation Agent:**
+
 - Tools: Read-only + file creation
 - Focus: Generate clear, comprehensive documentation
 - Output: Markdown docs, inline comments, API documentation
@@ -116,21 +121,25 @@ handoffs:  # Optional: workflow transitions
 ### 5. Workflow Integration Patterns
 
 **Sequential Handoff Chain:**
+
 ```
 Plan → Implement → Review → Deploy
 ```
 
 **Iterative Refinement:**
+
 ```
 Draft → Review → Revise → Finalize
 ```
 
 **Test-Driven Development:**
+
 ```
 Write Failing Tests → Implement → Verify Tests Pass
 ```
 
 **Research-to-Action:**
+
 ```
 Research → Recommend → Implement
 ```
