@@ -4,11 +4,45 @@ name: Custom Agent Foundry
 argument-hint: Describe the agent role, purpose, and required capabilities
 model: Claude Sonnet 4.6
 tools:
-  - search
-  - read_file
-  - create_file
-  - semantic_search
-  - grep_search
+  [
+    vscode/getProjectSetupInfo,
+    vscode/installExtension,
+    vscode/newWorkspace,
+    vscode/openSimpleBrowser,
+    vscode/runCommand,
+    vscode/askQuestions,
+    vscode/switchAgent,
+    vscode/vscodeAPI,
+    vscode/extensions,
+    execute/runNotebookCell,
+    execute/testFailure,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    agent/runSubagent,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+    web/fetch,
+    web/githubRepo,
+    todo,
+  ]
 ---
 
 # Custom Agent Foundry - Expert Agent Designer
