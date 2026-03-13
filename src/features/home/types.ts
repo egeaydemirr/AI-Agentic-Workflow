@@ -8,4 +8,12 @@ export interface HomeData {
   description: string;
 }
 
-// Add more types specific to home feature
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl?: string;
+  category: string;
+  inStock: boolean;
+}

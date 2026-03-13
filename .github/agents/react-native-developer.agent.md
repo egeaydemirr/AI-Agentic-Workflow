@@ -2,7 +2,6 @@
 description: Expert React Native developer - Feature development, debugging and code review with Koç Mobile architecture
 name: React Native Developer
 argument-hint: Describe the feature you want to develop, the bug you want to fix, or the code to review
-model: Claude Sonnet 4.6
 tools:
   [
     vscode/getProjectSetupInfo,

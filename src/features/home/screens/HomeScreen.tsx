@@ -3,51 +3,59 @@
  * Main home screen of the application
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Card, Text } from '../../../shared/ui';
+import { useNavigation } from '../../../navigation/hooks';
+import { Button, Text } from '../../../shared/ui';
 import { COLORS, SHADOWS } from '../../../theme';
+import { ProductList } from '../components/ProductList';
 import { useHomeScreen } from '../hooks/useHomeScreen';
+import { useProducts } from '../hooks/useProducts';
+import type { Product } from '../types';
 
 const HomeScreen: React.FC = () => {
-  const { greeting, handlePress } = useHomeScreen();
+  const { greeting } = useHomeScreen();
+  const navigation = useNavigation();
+  const { products, loading, isError, isRefreshing, refetch } = useProducts();
+
+  const handleProductPress = useCallback(
+    (product: Product) => {
+      navigation.navigate('ProductDetail', {
+        productId: product.id,
+        productName: product.name,
+      });
+    },
+    [navigation],
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Text variant="headlineLarge" style={styles.title}>
-          {greeting}
-        </Text>
-
-        <Card style={styles.card}>
-          <Text variant="bodyLarge" style={styles.description}>
-            This is a React Native project following Koç Mobil architecture
-            standards.
+      <View style={styles.header}>
+        <View>
+          <Text variant="headlineMedium" style={styles.title}>
+            {greeting}
           </Text>
           <Text variant="bodyMedium" style={styles.subtitle}>
-            Features:
+            Koç Mobil Architecture
           </Text>
-          <Text variant="bodySmall" style={styles.feature}>
-            • Redux Toolkit with RTK Query
-          </Text>
-          <Text variant="bodySmall" style={styles.feature}>
-            • React Navigation
-          </Text>
-          <Text variant="bodySmall" style={styles.feature}>
-            • React Native Paper theming
-          </Text>
-          <Text variant="bodySmall" style={styles.feature}>
-            • Modular feature architecture
-          </Text>
-        </Card>
-
+        </View>
         <Button
-          title="Get Started"
-          onPress={handlePress}
-          style={styles.button}
+          title="Sepet"
+          onPress={() => navigation.navigate('Cart')}
+          mode="contained-tonal"
+          icon="cart-outline"
         />
       </View>
+      <ProductList
+        products={products}
+        loading={loading}
+        isError={isError}
+        onRetry={refetch}
+        onProductPress={handleProductPress}
+        onRefresh={refetch}
+        isRefreshing={isRefreshing}
+      />
     </SafeAreaView>
   );
 };
@@ -57,36 +65,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  content: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.divider,
+    ...SHADOWS.medium,
+    backgroundColor: COLORS.background,
   },
   title: {
-    marginBottom: 24,
-    textAlign: 'center',
     color: COLORS.primary,
-  },
-  card: {
-    marginBottom: 24,
-    ...SHADOWS.medium,
-  },
-  description: {
-    marginBottom: 16,
-    color: COLORS.text,
+    fontWeight: '700',
   },
   subtitle: {
-    marginTop: 8,
-    marginBottom: 8,
-    fontWeight: '600',
-    color: COLORS.text,
-  },
-  feature: {
-    marginTop: 4,
     color: COLORS.textSecondary,
-  },
-  button: {
-    marginTop: 16,
+    marginTop: 2,
   },
 });
 

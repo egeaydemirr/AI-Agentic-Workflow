@@ -37,7 +37,7 @@ export const theme = {
     scrim: COLORS.overlay,
     backdrop: COLORS.overlayLight,
   },
-  roundness: 8,
+  roundness: 18,
 };
 
 export type AppTheme = typeof theme;

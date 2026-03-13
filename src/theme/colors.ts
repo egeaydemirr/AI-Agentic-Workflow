@@ -4,53 +4,53 @@
  */
 
 export const COLORS = {
-  // Primary colors (Koç brand colors)
-  primary: '#E30613',
-  primaryDark: '#B3050F',
-  primaryLight: '#FF3845',
+  // Primary colors (pastel green)
+  primary: '#7FBF9A',
+  primaryDark: '#4F8D6B',
+  primaryLight: '#DDF3E5',
 
   // Secondary colors
-  secondary: '#1A1A1A',
-  secondaryDark: '#000000',
-  secondaryLight: '#4A4A4A',
+  secondary: '#8DBFA6',
+  secondaryDark: '#5E9B7C',
+  secondaryLight: '#EAF7EF',
 
   // Accent colors
-  accent: '#FFA726',
-  accentDark: '#F57C00',
-  accentLight: '#FFB74D',
+  accent: '#A7D7B8',
+  accentDark: '#78B48F',
+  accentLight: '#EEF9F2',
 
   // Neutral colors
-  background: '#FFFFFF',
-  surface: '#F5F5F5',
-  surfaceVariant: '#E0E0E0',
+  background: '#F4FBF6',
+  surface: '#FFFFFF',
+  surfaceVariant: '#E7F4EB',
 
   // Text colors
-  text: '#1A1A1A',
-  textSecondary: '#757575',
-  textDisabled: '#BDBDBD',
+  text: '#1F3A2C',
+  textSecondary: '#5F7B6D',
+  textDisabled: '#A7B8B0',
   textInverse: '#FFFFFF',
 
   // Semantic colors
-  success: '#4CAF50',
-  successLight: '#81C784',
-  error: '#F44336',
-  errorLight: '#E57373',
-  warning: '#FF9800',
-  warningLight: '#FFB74D',
-  info: '#2196F3',
-  infoLight: '#64B5F6',
+  success: '#4FAE72',
+  successLight: '#BFE6CD',
+  error: '#D97B7B',
+  errorLight: '#F2CFCF',
+  warning: '#C7AA66',
+  warningLight: '#EEDFB7',
+  info: '#6FA7A0',
+  infoLight: '#CBE7E3',
 
   // Borders and dividers
-  border: '#E0E0E0',
-  divider: '#EEEEEE',
+  border: '#CFE3D7',
+  divider: '#E3EFE7',
 
   // Overlay
-  overlay: 'rgba(0, 0, 0, 0.5)',
-  overlayLight: 'rgba(0, 0, 0, 0.3)',
+  overlay: 'rgba(31, 58, 44, 0.42)',
+  overlayLight: 'rgba(31, 58, 44, 0.22)',
 
   // White and black
   white: '#FFFFFF',
-  black: '#000000',
+  black: '#10281D',
 } as const;
 
 export type ColorKey = keyof typeof COLORS;
