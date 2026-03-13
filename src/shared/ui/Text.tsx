@@ -26,15 +26,24 @@ interface TextProps {
     | 'labelMedium'
     | 'labelSmall';
   style?: StyleProp<TextStyle>;
+  numberOfLines?: number;
+  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
 }
 
 export const Text: React.FC<TextProps> = ({
   children,
   variant = 'bodyMedium',
   style,
+  numberOfLines,
+  ellipsizeMode,
 }) => {
   return (
-    <PaperText variant={variant} style={style}>
+    <PaperText
+      variant={variant}
+      style={style}
+      numberOfLines={numberOfLines}
+      ellipsizeMode={ellipsizeMode}
+    >
       {children}
     </PaperText>
   );

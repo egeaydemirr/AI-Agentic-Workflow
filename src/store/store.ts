@@ -15,12 +15,13 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
+import { cartReducer } from '../features/cart';
 import { baseApi } from '../services/api/baseApi';
 
 // Root reducer
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
-  // Add feature slices here
+  cart: cartReducer,
 });
 
 // Persist configuration
@@ -28,7 +29,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: [], // Add slice keys to persist
+  whitelist: ['cart'],
   blacklist: [baseApi.reducerPath], // Don't persist API cache
 };
 

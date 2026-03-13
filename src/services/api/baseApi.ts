@@ -5,7 +5,6 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import CONFIG from '../../config';
-import { logger } from '../../shared/utils';
 
 // Base query with automatic headers
 const baseQuery = fetchBaseQuery({
@@ -29,11 +28,6 @@ const baseQueryWithLogging: typeof baseQuery = async (
   extraOptions,
 ) => {
   const result = await baseQuery(args, api, extraOptions);
-
-  if (result.error) {
-    logger.error('API Error:', result.error);
-  }
-
   return result;
 };
 
@@ -41,7 +35,7 @@ const baseQueryWithLogging: typeof baseQuery = async (
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithLogging,
-  tagTypes: [], // Add tag types for cache invalidation
+  tagTypes: ['Product'], // Cache invalidation tag types
   endpoints: () => ({}),
 });
 

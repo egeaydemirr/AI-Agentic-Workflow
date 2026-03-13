@@ -3,3 +3,4 @@
  */
 
 export * from './useHomeScreen';
+export * from './useProducts';

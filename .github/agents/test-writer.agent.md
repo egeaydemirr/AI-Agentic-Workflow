@@ -3,19 +3,45 @@ description: Expert test writer - React Native unit and integration tests
 name: Test Writer
 argument-hint: Describe the screen, component, or hook you want to test
 tools:
-  - read_file
-  - create_file
-  - replace_string_in_file
-  - multi_replace_string_in_file
-  - semantic_search
-  - grep_search
-  - run_in_terminal
-  - get_errors
-  - usages
+  [
+    execute/runNotebookCell,
+    execute/testFailure,
+    execute/getTerminalOutput,
+    execute/awaitTerminal,
+    execute/killTerminal,
+    execute/createAndRunTask,
+    execute/runInTerminal,
+    read/getNotebookSummary,
+    read/problems,
+    read/readFile,
+    read/terminalSelection,
+    read/terminalLastCommand,
+    agent/runSubagent,
+    edit/createDirectory,
+    edit/createFile,
+    edit/createJupyterNotebook,
+    edit/editFiles,
+    edit/editNotebook,
+    search/changes,
+    search/codebase,
+    search/fileSearch,
+    search/listDirectory,
+    search/searchResults,
+    search/textSearch,
+    search/usages,
+  ]
 handoffs:
   - label: Code Review
     agent: Code Reviewer
     prompt: "Review the following tests for quality and security:\n\n"
+    send: false
+  - label: Implement Feature
+    agent: React Native Developer
+    prompt: "The following tests are failing. Help me implement the feature to pass them:\n\n"
+    send: false
+  - label: Prepare Merge
+    agent: Merge Coordinator
+    prompt: "Tests complete. Help prepare the branch for merge with versioning and setup:\n\n"
     send: false
 ---
 

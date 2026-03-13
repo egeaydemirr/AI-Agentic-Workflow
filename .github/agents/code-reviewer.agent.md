@@ -26,9 +26,17 @@ handoffs:
     agent: React Native Developer
     prompt: "Fix the following code review findings and apply improvements:\n\n"
     send: false
+  - label: Optimize Performance
+    agent: Performance Optimization
+    prompt: "Found performance issues. Create optimization plan:\n\n"
+    send: false
   - label: Write Tests
     agent: Test Writer
     prompt: "Write missing tests for the following code:\n\n"
+    send: false
+  - label: Prepare Merge
+    agent: Merge Coordinator
+    prompt: "Code review complete. Help prepare for merge with versioning and branch setup:\n\n"
     send: false
 ---
 

@@ -5,8 +5,8 @@
 
 export type RootStackParamList = {
   Home: undefined;
-  // Add more routes here with their parameters
-  // Example: Profile: { userId: string };
+  ProductDetail: { productId: string; productName: string };
+  Cart: undefined;
 };
 
 export type ScreenNames = keyof RootStackParamList;

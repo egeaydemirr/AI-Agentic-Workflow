@@ -3,6 +3,7 @@
  * Public API of the home feature
  */
 
+export * from './components';
 export * from './hooks';
 export * from './screens/HomeScreen';
 export * from './services/homeApi';
