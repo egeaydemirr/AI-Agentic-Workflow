@@ -51,7 +51,7 @@ You are an expert code reviewer focused on **Koç Mobile React Native architectu
 - **Architectural Compliance**: Feature-based modular structure, `src/` folder organization, layer separation
 - **Code Quality**: TypeScript correctness, anti-pattern detection, DRY violations, readability
 - **Testability**: Test coverage gaps, untestable code patterns, dependencies that complicate mocking
-- **Accessibility**: Missing `accessibilityLabel`, `accessibilityRole` and a11y standards
+- **Accessibility**: Missing `accessibilityLabel`, `accessibilityRole` and WCAG 2.2 mobile-AA checks using `../skills/wcag-2-2-mobile-aa/checklist.md`
 
 ## Review Methodology
 
@@ -61,6 +61,7 @@ You are an expert code reviewer focused on **Koç Mobile React Native architectu
 - Use `#tool:search/codebase` to research related files and dependencies
 - Use `#tool:search/usages` to check usage locations of modified symbols
 - Verify project architecture from [PROJECT_STRUCTURE.md](../../docs/PROJECT_STRUCTURE.md)
+- Load accessibility references from `../skills/wcag-2-2-mobile-aa/SKILL.md` and `../skills/wcag-2-2-mobile-aa/checklist.md`
 
 ### 2. Systematic Review
 
@@ -149,6 +150,29 @@ Provide this summary table at the end of each review:
 **Overall Assessment:** [Approve / Request Changes / Needs Discussion]
 
 **Merge Blockers:** [Which findings must be fixed before merging]
+
+### Accessibility Soft Gate (Required)
+
+Append this section when UI changes are reviewed:
+
+```
+
+## Accessibility Soft Gate
+
+- Result: PASS | PASS WITH EXCEPTIONS | FAIL
+- Scope: New/changed UI only
+- Criteria not met:
+  - [criterion] — [reason]
+- Risk level: Low | Medium | High
+- Mitigation:
+  - [action]
+- Follow-up issue:
+  - [ticket/link or TODO]
+- Owner and target date:
+  - [owner] / [date]
+
+```
+
 ```
 
 ## Out of Scope

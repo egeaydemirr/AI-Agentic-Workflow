@@ -1,5 +1,9 @@
 # Koç Mobile Custom Agent Workflow
 
+> Accessibility standard source: [../.github/skills/wcag-2-2-mobile-aa/SKILL.md](../.github/skills/wcag-2-2-mobile-aa/SKILL.md)
+>
+> Policy: WCAG 2.2 AA (mobile-adapted), only for new/changed UI, soft gate at merge.
+
 ## 📋 Tüm Agent'lar
 
 Koç Mobile React Native ekibinin kullanabileceği 6 custom agent:
@@ -43,6 +47,11 @@ INPUT: "Home sayfasına ürün listesi ekle"
     - Unit test hangileri?
     - Integration test hangileri?
     - Mock strategy nedir?
+
+[5] Erişilebilirlik planını ekle
+    - Skill checklist maddeleri
+    - Ekran bazlı acceptance criteria
+    - Kapsam: sadece yeni/değişen UI
 
 OUTPUT: Comprehensive architecture plan
   → React Native Developer ile handoff
@@ -118,6 +127,11 @@ INPUT: Implementation + architecture plan
     - All passing?
     - Snapshot updates needed?
 
+[5] A11y kanıtı üret
+    - Otomatik testlenen kriterler
+    - Manüel doğrulanan kriterler
+    - İstisnalar + risk + takip aksiyonu
+
 [5] Handoff seçenekleri
     ├→ "Code review tests" → Code Reviewer
     ├→ "Implement feature" → React Native Dev (failing tests)
@@ -157,6 +171,10 @@ INPUT: Code + tests + architecture plan
     - High: Fix soon
     - Medium: Fix in review
     - Low: Nice to have
+
+[6] Accessibility soft gate özeti ekle
+    - PASS / PASS WITH EXCEPTIONS / FAIL
+    - Karşılanmayan kriter + mitigation + owner/date
 
 [6] Handoff seçenekleri
     ├→ "Performance issues" → Performance Opt
@@ -258,7 +276,7 @@ INPUT: Finalized code + tests + reviews
     ☑ Testing: yarn test pass, >80% coverage
     ☑ Performance: Bundle +40KB (OK), no leaks
     ☑ Security: yarn audit pass, no secrets
-    ☑ A11y: Labels present, contrast OK
+    ☑ A11y: Skill checklist + soft gate çıktısı mevcut
     ☑ Documentation: CHANGELOG updated, comments
     ☑ Git: Commits clean, branch name valid
 

@@ -126,6 +126,8 @@ src/
 - Before writing something new, research existing code with `semantic_search` and `grep_search` — don't rewrite!
 - Manage platform differences in `src/shared/platform/`
 - Always check `src/i18n/` integration for internationalization
+- For UI work, follow accessibility skill source: `../skills/wcag-2-2-mobile-aa/SKILL.md`
+- Apply WCAG checks only to new/changed UI and capture evidence format from skill docs
 
 ### When Creating a Feature
 
@@ -155,6 +157,7 @@ src/
 - Don't use magic strings; use constants from `src/config/` or feature `types.ts`
 - Custom hook names must start with `use`
 - Export: components with `default export`, types and constants with `named export`
+- For interactive components, include `accessibilityRole`, `accessibilityLabel`, and state semantics (`accessibilityState`) where applicable
 
 ## Restrictions
 

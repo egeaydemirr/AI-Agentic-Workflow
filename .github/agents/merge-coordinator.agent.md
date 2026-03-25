@@ -373,11 +373,33 @@ Comprehensive verification before merging:
 
 #### 5.5 Accessibility
 
+Source of truth: `../skills/wcag-2-2-mobile-aa/SKILL.md` and `../skills/wcag-2-2-mobile-aa/checklist.md`
+
 - [ ] **Semantic structure**: Proper component hierarchy
 - [ ] **Screen reader labels**: accessibilityLabel on interactive elements
 - [ ] **Color contrast**: Text readable (WCAG AA minimum)
 - [ ] **Touch targets**: All buttons ≥ 44x44pt
 - [ ] **Keyboard navigation**: Full keyboard support
+- [ ] **Scope**: Checked only new/changed UI components/screens in this PR
+- [ ] **Exceptions**: Any unmet criteria documented with mitigation + owner/date
+
+Required output for UI changes:
+
+```markdown
+## Accessibility Soft Gate
+
+- Result: PASS | PASS WITH EXCEPTIONS | FAIL
+- Scope: New/changed UI only
+- Criteria not met:
+  - [criterion] — [reason]
+- Risk level: Low | Medium | High
+- Mitigation:
+  - [action]
+- Follow-up issue:
+  - [ticket/link or TODO]
+- Owner and target date:
+  - [owner] / [date]
+```
 
 #### 5.6 Documentation
 
