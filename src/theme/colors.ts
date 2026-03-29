@@ -53,6 +53,18 @@ export const COLORS = {
   black: '#10281D',
 } as const;
 
+export const CATALOG2_COLORS = {
+  background: '#F9F9F9',
+  surface: '#FFFFFF',
+  textPrimary: '#222222',
+  textSecondary: '#9B9B9B',
+  accent: '#DB3022',
+  star: '#FFBA49',
+  border: '#EDEDED',
+  tabBarBorder: '#F0F0F0',
+  heartInactive: '#9B9B9B',
+} as const;
+
 export type ColorKey = keyof typeof COLORS;
 
 export default COLORS;

@@ -15,6 +15,8 @@ interface ButtonProps {
   loading?: boolean;
   style?: StyleProp<ViewStyle>;
   icon?: string;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -25,6 +27,8 @@ export const Button: React.FC<ButtonProps> = ({
   loading = false,
   style,
   icon,
+  accessibilityLabel,
+  accessibilityHint,
 }) => {
   return (
     <PaperButton
@@ -34,6 +38,9 @@ export const Button: React.FC<ButtonProps> = ({
       loading={loading}
       style={style}
       icon={icon}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel ?? title}
+      accessibilityHint={accessibilityHint}
     >
       {title}
     </PaperButton>

@@ -47,6 +47,18 @@ const HomeScreen: React.FC = () => {
           icon="cart-outline"
         />
       </View>
+
+      <View style={styles.catalogCtaContainer}>
+        <Button
+          title="Figma Catalog"
+          onPress={() => navigation.navigate('Catalog2')}
+          mode="contained"
+          icon="store-search-outline"
+          accessibilityLabel="Katalog ekranına git"
+          accessibilityHint="Ürün kataloğu ekranını açar"
+        />
+      </View>
+
       <ProductList
         products={products}
         loading={loading}
@@ -84,6 +96,10 @@ const styles = StyleSheet.create({
   subtitle: {
     color: COLORS.textSecondary,
     marginTop: 2,
+  },
+  catalogCtaContainer: {
+    paddingHorizontal: 16,
+    paddingTop: 12,
   },
 });
 

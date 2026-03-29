@@ -43,4 +43,22 @@ export const TYPOGRAPHY = {
   },
 } as const;
 
+export const CATALOG2_TYPOGRAPHY = {
+  family: {
+    regular: 'Metropolis-Regular',
+    medium: 'Metropolis-Medium',
+    semibold: 'Metropolis-SemiBold',
+    bold: 'Metropolis-Bold',
+  },
+  size: {
+    xs: 10,
+    sm: 11,
+    base: 12,
+    md: 14,
+    lg: 16,
+    xl: 18,
+    '2xl': 28,
+  },
+} as const;
+
 export default TYPOGRAPHY;
