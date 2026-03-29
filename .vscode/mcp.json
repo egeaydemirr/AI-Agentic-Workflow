@@ -1,0 +1,28 @@
+{
+  "servers": {
+    "figmaContext": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@tmegit/figma-developer-mcp",
+        "--figma-api-key=${input:figma-api-key-v2}",
+        "--stdio"
+      ],
+      "sandboxEnabled": true,
+      "sandbox": {
+        "network": {
+          "allowedDomains": ["api.figma.com"]
+        }
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "figma-api-key-v2",
+      "description": "Figma Personal Access Token",
+      "password": true
+    }
+  ]
+}
